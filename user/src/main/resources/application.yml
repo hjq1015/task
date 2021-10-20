@@ -1,0 +1,37 @@
+server:
+  port: 6666
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+spring:
+  application:
+    name: USER-SERVICE
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=Asia/Shanghai
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+
+# mybatis 分页插件
+pagehelper:
+  #  使用PostgreSQL方言
+  helper-dialect: postgreSQL
+  #  分页合理化
+  reasonable: true
+  #支持通过 Mapper 接口参数来传递分页参数
+  support-methods-arguments: true
+  #支持startPage(Object params)方法
+  params: count=countSql
+
+logging:
+  level:
+    com.thoughtworks.mapper: info
