@@ -14,25 +14,25 @@ public class TestResult {
     private final Result<Integer> result = new Result<>(1);
 
     @Test
-    public void testSetMsg(){
+    public void testSetMsg() {
         result.setMsg(BaseConstants.SUCCESS_MSG);
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testSetCode(){
+    public void testSetCode() {
         result.setCode(BaseConstants.SUCCESS_CODE);
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testSetCount(){
+    public void testSetCount() {
         result.setCount(0L);
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testSetData(){
+    public void testSetData() {
         result.setData(1);
         Assert.assertTrue(true);
     }

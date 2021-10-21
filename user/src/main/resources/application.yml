@@ -4,6 +4,9 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    instance-id: user-service #自定义服务名称信息
+    prefer-ip-address: false     #访问路径可以显示IP地址
 
 spring:
   application:
@@ -38,3 +41,17 @@ pagehelper:
 logging:
   level:
     com.thoughtworks.mapper: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
+
+info:
+  app.name: user
+  company.name: yong.huang1@thoughtworks.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
