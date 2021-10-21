@@ -7,7 +7,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:5.1.1'
     implementation 'com.github.pagehelper:pagehelper:5.1.4'
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.10'
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.alibaba:fastjson:1.2.76'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
