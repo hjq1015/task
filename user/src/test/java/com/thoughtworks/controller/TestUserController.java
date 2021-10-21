@@ -3,6 +3,7 @@ package com.thoughtworks.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.thoughtworks.UserApplication;
+import com.thoughtworks.constant.BaseConstants;
 import com.thoughtworks.entity.Result;
 import com.thoughtworks.entity.UserEntity;
 import com.thoughtworks.entity.UserOperateRequest;
@@ -28,6 +29,9 @@ import java.util.List;
 @SpringBootTest(classes = UserApplication.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestUserController {
+    private static final String NAME = "ZhangSan";
+    private static final int AGE = 18;
+
     @Autowired
     private UserController userController;
 
@@ -44,12 +48,33 @@ public class TestUserController {
     }
 
     @Test
-    public void testQueryUserList() throws JSONException {
+    public void testQueryUserList01() throws JSONException {
         UserQueryRequest queryRequest = new UserQueryRequest();
         queryRequest.setPageNo(1);
         queryRequest.setPageSize(10);
+        queryRequest.setOrderBy(BaseConstants.DEFAULT_ORDER_BY_FIELD);
+        queryRequest.setAge(AGE);
+        queryRequest.setName(NAME);
+        queryRequest.setCreatedAtStart(new Date());
+        queryRequest.setCreatedAtEnd(new Date());
         List<UserEntity> users = Lists.newArrayList();
-        users.add(getUserEntity("HuangYong", 32));
+        users.add(getUserEntity(NAME, AGE));
+        Mockito.when(userMapper.queryUserList(queryRequest)).thenReturn(users);
+        JSONAssert.assertEquals(JSONObject.toJSONString(userController.queryUserList(queryRequest)),
+                JSONObject.toJSONString(Result.success(users, (long) users.size())), false);
+    }
+
+    @Test
+    public void testQueryUserList02() throws JSONException {
+        UserQueryRequest queryRequest = new UserQueryRequest();
+        queryRequest.setPageNo(1);
+        queryRequest.setPageSize(10);
+        queryRequest.setAge(AGE);
+        queryRequest.setName(NAME);
+        queryRequest.setCreatedAtStart(new Date());
+        queryRequest.setCreatedAtEnd(new Date());
+        List<UserEntity> users = Lists.newArrayList();
+        users.add(getUserEntity(NAME, AGE));
         Mockito.when(userMapper.queryUserList(queryRequest)).thenReturn(users);
         JSONAssert.assertEquals(JSONObject.toJSONString(userController.queryUserList(queryRequest)),
                 JSONObject.toJSONString(Result.success(users, (long) users.size())), false);
@@ -57,12 +82,10 @@ public class TestUserController {
 
     @Test
     public void testAddUser() throws JSONException {
-        String name = "ZhangSan";
-        int age = 18;
-        UserEntity userEntity = getUserEntity(name, age);
+        UserEntity userEntity = getUserEntity(NAME, AGE);
         UserOperateRequest request = new UserOperateRequest();
-        request.setName(name);
-        request.setAge(age);
+        request.setName(NAME);
+        request.setAge(AGE);
         Mockito.when(userMapper.addUser(request)).thenReturn(1);
         JSONAssert.assertEquals(JSONObject.toJSONString(userController.addUser(request)),
                 JSONObject.toJSONString(Result.success(userEntity)), false);
@@ -70,12 +93,11 @@ public class TestUserController {
 
     @Test
     public void testUpdateUser() throws JSONException {
-        String name = "ZhangSan";
-        int age = 18;
-        UserEntity userEntity = getUserEntity(name, age);
+        UserEntity userEntity = getUserEntity(NAME, AGE);
         UserOperateRequest request = new UserOperateRequest();
-        request.setName(name);
-        request.setAge(age);
+        request.setId(1L);
+        request.setName(NAME);
+        request.setAge(AGE);
         Mockito.when(userMapper.addUser(request)).thenReturn(1);
         JSONAssert.assertEquals(JSONObject.toJSONString(userController.updateUser(request)),
                 JSONObject.toJSONString(Result.success(userEntity)), false);
@@ -83,12 +105,10 @@ public class TestUserController {
 
     @Test
     public void testDeleteUser() throws JSONException {
-        String name = "ZhangSan";
-        int age = 18;
-        UserEntity userEntity = getUserEntity(name, age);
+        UserEntity userEntity = getUserEntity(NAME, AGE);
         UserOperateRequest request = new UserOperateRequest();
-        request.setName(name);
-        request.setAge(age);
+        request.setName(NAME);
+        request.setAge(AGE);
         Mockito.when(userMapper.addUser(request)).thenReturn(1);
         JSONAssert.assertEquals(JSONObject.toJSONString(userController.deleteUser(request.getId())),
                 JSONObject.toJSONString(Result.success(userEntity)), false);
@@ -100,6 +120,7 @@ public class TestUserController {
         userEntity.setId(1L);
         userEntity.setName(name);
         userEntity.setAge(age);
+        userEntity.setEmail(null);
         userEntity.setCreatedAt(now);
         userEntity.setUpdatedAt(now);
         return userEntity;

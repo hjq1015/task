@@ -2,6 +2,7 @@ package com.thoughtworks.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.thoughtworks.constant.BaseConstants;
 import com.thoughtworks.entity.Result;
 import com.thoughtworks.entity.UserEntity;
 import com.thoughtworks.entity.UserOperateRequest;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -24,7 +26,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Result<List<UserEntity>> queryUserList(UserQueryRequest request) {
-        PageHelper.startPage(request.getPageNo(), request.getPageSize());
+        PageHelper.startPage(request.getPageNo(), request.getPageSize(),
+                Objects.nonNull(request.getOrderBy()) ? request.getOrderBy() : BaseConstants.DEFAULT_ORDER_BY_FIELD);
         List<UserEntity> users = userMapper.queryUserList(request);
         PageInfo<UserEntity> pageInfo = new PageInfo<>(users);
         return Result.success(pageInfo.getList(), pageInfo.getTotal());

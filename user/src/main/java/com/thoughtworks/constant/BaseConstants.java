@@ -20,4 +20,9 @@ public interface BaseConstants {
      * 时区
      */
     String TIME_ZONE = "GMT+8";
+
+    /**
+     * 默认排序字段
+     */
+    String DEFAULT_ORDER_BY_FIELD = "createdAt desc, id";
 }

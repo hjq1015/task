@@ -17,10 +17,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @MapperScan("com.thoughtworks.mapper")
 public class UserApplication {
     public static void main(String[] args) {
-        try {
-            SpringApplication.run(UserApplication.class, args);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        SpringApplication.run(UserApplication.class, args);
     }
 }
