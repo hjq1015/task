@@ -2,3 +2,12 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
     compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
 }
+
+jar {
+    baseName("gateway")
+    version("1.0")
+}
+
+tasks.withType(Jar) {
+    destinationDir = file("$rootDir/gateway/build/libs")      //$rootDir 取项目的顶级目录
+}

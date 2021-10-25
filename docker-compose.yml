@@ -4,14 +4,14 @@ services:
   mic-eureka:
     build:
       context: eureka
-    image: mic-eureka:latest
+    image: hjq1015/mic-eureka:latest
     ports:
       - 8761:8761
 
   mic-gateway:
     build:
       context: gateway
-    image: mic-gateway:latest
+    image: hjq1015/mic-gateway:latest
     links:
       - mic-eureka
       - mic-user
@@ -21,10 +21,10 @@ services:
 
   mic-user:
     build:
-      context: user-service
-    image: mic-user:latest
+      context: user
+    image: hjq1015/mic-user:latest
 
   mic-email:
     build:
-      context: email-service
-    image: mic-email:latest
+      context: email
+    image: hjq1015/mic-email:latest

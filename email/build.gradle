@@ -6,3 +6,12 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
+
+jar {
+    baseName("email")
+    version("1.0")
+}
+
+tasks.withType(Jar) {
+    destinationDir = file("$rootDir/email/build/libs")      //$rootDir 取项目的顶级目录
+}

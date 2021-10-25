@@ -1,4 +1,4 @@
-package com.linkinstar.gateway;
+package com.thoughtworks;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
