@@ -1,7 +1,6 @@
 package com.thoughtworks.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import com.thoughtworks.UserApplication;
 import com.thoughtworks.constant.BaseConstants;
 import com.thoughtworks.entity.Result;
@@ -12,7 +11,6 @@ import com.thoughtworks.mapper.UserMapper;
 import com.thoughtworks.service.IUserService;
 import org.assertj.core.util.Lists;
 import org.json.JSONException;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

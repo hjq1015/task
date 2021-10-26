@@ -1,10 +1,10 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.4.RELEASE'
+        springBootVersion = '2.0.4.RELEASE'
         springCloudVersion = 'Finchley.SR1'
     }
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
         mavenCentral()
     }
     dependencies {
@@ -18,6 +18,7 @@ allprojects {
     apply plugin: 'jacoco'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    //apply plugin: 'org.flywaydb.flyway'
 
     group = 'com.thoughtworks'
     version = '1.0'
@@ -26,13 +27,13 @@ allprojects {
     jar.enabled(true)
 
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
         maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
     }
 
     dependencies {
-        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testImplementation('org.springframework.boot:spring-boot-starter-test')
     }
 
     dependencyManagement {
@@ -49,4 +50,8 @@ allprojects {
     }
 
     check.dependsOn jacocoTestReport
+}
+
+tasks.withType(Jar) {
+    destinationDir = file("$rootDir/build/libs")      //$rootDir 取项目的顶级目录
 }
